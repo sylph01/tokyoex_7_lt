@@ -31,7 +31,7 @@
 
 画像が多いので
 
-https://github.com/sylph01/tokyoex_7_lt
+``https://github.com/sylph01/tokyoex_7_lt``
 
 を見ながら聞くことをおすすめします
 
