@@ -124,6 +124,9 @@ https://github.com/neo4j-examples/bolt_movies_elixir_phoenix
 
 チュートリアルにある映画の共演関係のグラフを使ったサンプル。
 
+* Neo4jインストール後、`neo4j start` でサーバーを立ち上げ
+* `mix deps.get`, `mix deps.compile`, `mix phoenix.server`
+
 ----
 
 ![fit](matrix.png)
@@ -328,7 +331,7 @@ iex(13)> Bolt.Sips.query!(Bolt.Sips.conn, q)
 ```
 iex(18)> q = "MATCH (o:Object {name: 'o6'})-[:HAS_ATTRIBUTE*]->
   (oa:ObjectAttribute)<-[:WRITE]-(ua:UserAttribute)\n RETURN o, oa"
-iex(19)> Bolt.Sips.query!(Bolt.Sips.conn, q)                                                                                    
+iex(19)> Bolt.Sips.query!(Bolt.Sips.conn, q)
 [debug] #Port<0.6744> - cypher: (略)
 [%{"o" => %Bolt.Sips.Types.Node{id: 174, labels: ["Object"],
     properties: %{"name" => "o6"}},
