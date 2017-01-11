@@ -1,0 +1,77 @@
+MATCH (u:User {name: "u3"})
+FOREACH (n in ["Ward2", "Doctor"] |
+  CREATE (u)-[:HAS_ATTRIBUTE]->(:UserAttribute {name: n}))
+
+MATCH (ua:UserAttribute {name: "Doctor"})
+FOREACH (n in ["Intern", "Emergency"] |
+  CREATE (ua)-[:HAS_ATTRIBUTE]->(:UserAttribute {name: n}))
+
+MATCH (u:User {name: "u4"})
+MATCH (ua:UserAttribute {name: "Intern"})
+CREATE (u)-[:HAS_ATTRIBUTE]->(ua)
+
+MATCH (u:User {name: "u4"})
+CREATE (u)-[:HAS_ATTRIBUTE]->(:UserAttribute {name: "Ward1"})
+
+FOREACH(n in ["MedRecords","Ward2","Ward1","Critical"] |
+  CREATE (:ObjectAttribute {name: n}))
+
+MATCH (o:Object {name: "o7"})
+MATCH (oa:ObjectAttribute {name: "MedRecords"})
+CREATE (o)-[:HAS_ATTRIBUTE]->(oa)
+
+MATCH (o:Object {name: "o6"})
+MATCH (oa:ObjectAttribute {name: "MedRecords"})
+CREATE (o)-[:HAS_ATTRIBUTE]->(oa)
+
+MATCH (o:Object {name: "o5"})
+MATCH (oa:ObjectAttribute {name: "MedRecords"})
+CREATE (o)-[:HAS_ATTRIBUTE]->(oa)
+
+MATCH (o:Object {name: "o7"})
+MATCH (oa:ObjectAttribute {name: "Ward1"})
+CREATE (o)-[:HAS_ATTRIBUTE]->(oa)
+
+MATCH (o:Object {name: "o6"})
+MATCH (oa:ObjectAttribute {name: "Ward1"})
+CREATE (o)-[:HAS_ATTRIBUTE]->(oa)
+
+MATCH (o:Object {name: "o5"})
+MATCH (oa:ObjectAttribute {name: "Ward2"})
+CREATE (o)-[:HAS_ATTRIBUTE]->(oa)
+
+MATCH (o:Object {name: "o7"})
+MATCH (oa:ObjectAttribute {name: "Critical"})
+CREATE (o)-[:HAS_ATTRIBUTE]->(oa)
+
+MATCH (ua:UserAttribute {name: "Ward2"})
+MATCH (oa:ObjectAttribute {name: "Ward2"})
+CREATE (ua)-[:READ]->(oa)
+
+MATCH (ua:UserAttribute {name: "Ward1"})
+MATCH (oa:ObjectAttribute {name: "Ward1"})
+CREATE (ua)-[:READ]->(oa)
+
+MATCH (ua:UserAttribute {name: "Emergency"})
+MATCH (oa:ObjectAttribute {name: "Critical"})
+CREATE (ua)-[:READ]->(oa)
+
+MATCH (ua:UserAttribute {name: "Ward2"})
+MATCH (oa:ObjectAttribute {name: "Ward2"})
+CREATE (ua)-[:WRITE]->(oa)
+
+MATCH (ua:UserAttribute {name: "Ward1"})
+MATCH (oa:ObjectAttribute {name: "Ward1"})
+CREATE (ua)-[:WRITE]->(oa)
+
+MATCH (ua:UserAttribute {name: "Emergency"})
+MATCH (oa:ObjectAttribute {name: "Critical"})
+CREATE (ua)-[:WRITE]->(oa)
+
+MATCH (ua:UserAttribute {name: "Doctor"})
+MATCH (oa:ObjectAttribute {name: "MedRecords"})
+CREATE (ua)-[:WRITE]->(oa)
+
+MATCH (ua:UserAttribute {name: "Intern"})
+MATCH (oa:ObjectAttribute {name: "MedRecords"})
+CREATE (ua)-[:READ]->(oa)
